@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardProjects from '../components/CardProjects.astro'
+---
+
+<Layout title="Web Dev Bootcamp by Angela Yu">
+	<main class="w-full max-w-3xl mx-auto">
+		<h1 class="text-center">Bootcamp Projects</h1>
+		<section class="mx-auto grid">
+			<CardProjects 
+			src='img/drum-kit.png'
+			alt='drum kit project pic'
+			title='Drum Kit'
+			subtitle='DOM Managment intermediate - Advanced'/>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	section {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(240px, 320px));
+		gap: 1rem;
+	}
+</style>
