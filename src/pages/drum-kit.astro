@@ -1,0 +1,62 @@
+---
+import DkBtn from "../components/Dk-btn.astro"
+import Layout from "../layouts/Layout.astro"
+---
+<Layout title="Drum Kit Project">
+    <section class="w-[90%] max-w-3xl min-h-screen flex flex-col justify-evenly items-center mx-auto">
+        <div class="w-full flex justify-between items-center">
+            <h2 class="text-5xl">Drum Kit</h2>
+            <a class="[&>svg]:hover:text-[var(--accent)]" href="/#">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up h-12 w-12 duration-300"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+            </a>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+            <DkBtn 
+            id="tom1"
+            src="/img/dk-tom1.png"
+            alt="tom 1 pic"
+            char="w"/>
+            <DkBtn 
+            id="tom2"
+            src="/img/dk-tom2.png"
+            alt="tom 2 pic"
+            char="a"/>
+            <DkBtn 
+            id="tom3"
+            src="/img/dk-tom3.png"
+            alt="tom 3 pic"
+            char="s"/>
+            <DkBtn 
+            id="tom4"
+            src="/img/dk-tom4.png"
+            alt="tom 4 pic"
+            char="d"/>
+            <DkBtn 
+            id="snare"
+            src="/img/dk-snare.png"
+            alt="snare pic"
+            char="j"/>
+            <DkBtn 
+            id="crash"
+            src="/img/dk-crash.png"
+            alt="crash pic"
+            char="k"/>
+            <DkBtn 
+            id="kick"
+            src="/img/dk-kick.png"
+            alt="kick pic"
+            char="l"/>            
+        </div>
+        <p>Made with ❤️ by Alpes</p>
+    </section>
+</Layout>

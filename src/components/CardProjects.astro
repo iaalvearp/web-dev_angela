@@ -11,12 +11,18 @@ const { href, src, alt, title, subtitle } = Astro.props
 ---
 
 
-<a href={ href }>
-    <picture>
-        <img src={ src } alt={ alt }>
+<a class="rounded-md overflow-hidden relative" href={ href }>
+    <picture class="aspect-video overflow-hidden w-full">
+        <img class="scale-100 duration-300" src={ src } alt={ alt }>
     </picture>
-    <div>
-        <h2>{ title }</h2>
-        <p>{ subtitle }</p>
+    <div class="py-4 pl-4 border border-[var(--secondary)] border-t-0 rounded-b-md">
+        <h2 class="text-xl font-medium text-[var(--accent)]">{ title }</h2>
+        <p class="text-xs">{ subtitle }</p>
     </div>
 </a>
+
+<style>
+    a:hover picture img {
+        transform: scale(1.1);
+    }
+</style>
