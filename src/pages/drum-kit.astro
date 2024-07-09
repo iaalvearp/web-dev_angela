@@ -2,11 +2,12 @@
 import DkBtn from "../components/Dk-btn.astro"
 import Layout from "../layouts/Layout.astro"
 ---
+
 <Layout title="Drum Kit Project">
     <section class="w-[90%] max-w-3xl min-h-screen flex flex-col justify-evenly items-center mx-auto">
         <div class="w-full flex justify-between items-center">
             <h2 class="text-5xl">Drum Kit</h2>
-            <a class="[&>svg]:hover:text-[var(--accent)]" href="/#">
+            <a class="[&>svg]:hover:text-[var(--accent)] scale-100 active:scale-90 duration-300" href="/#">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -60,3 +61,21 @@ import Layout from "../layouts/Layout.astro"
         <p>Made with ❤️ by Alpes</p>
     </section>
 </Layout>
+
+
+
+<script>
+
+    const playSound = (drum) => {
+        let src = `/sounds/dk-${drum.id}.mp3`
+        let sound = new Audio(src)
+        sound.play()
+    }
+
+    document.querySelectorAll(".dk-btn").forEach(drum => {
+        drum.addEventListener('click', (e) => {
+            e.preventDefault()
+            playSound(drum)
+        })
+    })
+</script>
