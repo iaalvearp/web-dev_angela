@@ -66,16 +66,60 @@ import Layout from "../layouts/Layout.astro"
 
 <script>
 
-    const playSound = (drum) => {
-        let src = `/sounds/dk-${drum.id}.mp3`
-        let sound = new Audio(src)
-        sound.play()
-    }
+    document.addEventListener("astro:page-load", () => {
+        const playSoundWithButton = (src:string) => {
+                let path = `/sounds/dk-${src}.mp3`;
+                let sound = new Audio(path);
+                sound.play();
+            };    
+        
+        const buttons = document.querySelectorAll(".dk-btn");
+            buttons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const src = button.id;
+                    playSoundWithButton(src);
+                });
+            });
 
-    document.querySelectorAll(".dk-btn").forEach(drum => {
-        drum.addEventListener('click', (e) => {
-            e.preventDefault()
-            playSound(drum)
-        })
+        });
+    
+    let src = ""
+    
+    const playSoundWithKey = (drum) => {
+        switch (drum) {
+            case "KeyW":
+                src = '/sounds/dk-tom1.mp3'
+                break
+            case "KeyA":
+                src = '/sounds/dk-tom2.mp3'
+                break
+            case "KeyS":
+                src = '/sounds/dk-tom3.mp3'
+                break
+            case "KeyD":
+                src = '/sounds/dk-tom4.mp3'
+                break
+            case "KeyJ":
+                src = '/sounds/dk-snare.mp3'
+                break
+            case "KeyK":
+                src = '/sounds/dk-crash.mp3'
+                break
+            case "KeyL":
+                src = '/sounds/dk-kick.mp3'
+                break
+        
+            default:
+                break;
+            }
+
+            let sound = new Audio(src)
+            sound.play()
+        }
+        
+
+    document.addEventListener('keydown', key => {
+        playSoundWithKey(key.code)
     })
+
 </script>
