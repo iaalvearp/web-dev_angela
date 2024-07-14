@@ -65,8 +65,84 @@ import Layout from "../layouts/Layout.astro"
 
 
 <script>
+    const tom1 = document.getElementById('tom1')
+    const tom2 = document.getElementById('tom2')
+    const tom3 = document.getElementById('tom3')
+    const tom4 = document.getElementById('tom4')
+    const snare = document.getElementById('snare')
+    const crash = document.getElementById('crash')
+    const kick = document.getElementById('kick')
+
+    function clicked (btn) {
+        btn.style.transform = 'scale(.9)'
+        setTimeout(() => {
+            btn.style.transform = 'scale(1)'
+        }, 200);
+    }
 
     document.addEventListener("astro:page-load", () => {
+        // Angela's solution
+        let numberOfDumsButtons = document.querySelectorAll(".dk-btn").length;
+
+        function playSound (char) {
+            let src = ""
+            char = `${char.toLowerCase().trim()}`;
+            switch (char) {
+                    case "w":
+                        src = "/sounds/dk-tom1.mp3"
+                        clicked(tom1)
+                        break;
+                    case "a":
+                        src = "/sounds/dk-tom2.mp3"
+                        clicked(tom2)
+                        break;
+                    case "s":
+                        src = "/sounds/dk-tom3.mp3"
+                        clicked(tom3)
+                        break;
+                    case "d":
+                        src = "/sounds/dk-tom4.mp3"
+                        clicked(tom4)
+                        break;
+                    case "j":
+                        src = "/sounds/dk-snare.mp3"
+                        clicked(snare)
+                        break;
+                    case "k":
+                        src = "/sounds/dk-crash.mp3"
+                        clicked(crash)
+                        break;
+                    case "l":
+                        src = "/sounds/dk-kick.mp3"
+                        clicked(kick)
+                        break;
+                    default:
+                        console.log("No matching case for buttonInnerHTML:", char);
+                        break;
+                }
+
+                let audio = new Audio(src)
+                audio.play()
+        }
+
+        for (let i = 0; i < numberOfDumsButtons; i++) {
+            
+            document.querySelectorAll(".dk-btn")[i].addEventListener('click', function () {
+                
+                let char = `${this.textContent}`  
+                playSound(char)              
+            })
+            
+        }
+
+        document.addEventListener('keydown', function (key) {
+            let char = `${key.key}`
+            playSound(char)
+        })
+    })
+
+    // My solution
+    /*document.addEventListener("astro:page-load", () => {
         const playSoundWithButton = (src:string) => {
                 let path = `/sounds/dk-${src}.mp3`;
                 let sound = new Audio(path);
@@ -120,6 +196,6 @@ import Layout from "../layouts/Layout.astro"
 
     document.addEventListener('keydown', key => {
         playSoundWithKey(key.code)
-    })
+    })*/
 
 </script>

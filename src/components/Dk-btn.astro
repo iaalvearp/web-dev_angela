@@ -9,7 +9,7 @@ interface Props {
 const { id, src, alt, char } = Astro.props
 ---
 
-<button id={ id } type="button" class="dk-btn aspect-square h-20 w-20 flex justify-center items-center overflow-hidden relative rounded border-8 border-[var(--accent)] scale-100 active:scale-90 duration-300">
+<button id={ id } type="button" class="dk-btn aspect-square h-20 w-20 flex justify-center items-center overflow-hidden relative rounded border-8 border-[var(--accent)] scale-100 duration-300">
     <img class="absolute w-full h-full p-1 object-cover object-top z-0" src={ src } alt={ alt }>
     <h3 class="inset-0 m-auto z-10 text-5xl font-semibold text-[var(--accent)] uppercase">{ char }</h3>
 </button>
