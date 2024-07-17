@@ -1,18 +1,37 @@
 ---
+import JQueryBtn from "../components/JQuery-Btn.astro"
 import SimonSquare from "../components/Simon-Square.astro"
 import Layout from "../layouts/Layout.astro"
 ---
 
 <script>
-    const playSound = src => {
-        let audio = new Audio(`sounds/simon-${src.id}.mp3`)
-        audio.play()
-    }
-
     document.addEventListener("astro:page-load", () => {
+        const modal = document.getElementById('modal')
+        const btnCloseModal = document.getElementById('close-modal')
         const btns = document.querySelectorAll(".simon-btn")
+        const playSound = src => {
+            let audio = new Audio(`sounds/simon-${src.id}.mp3`)
+            audio.play()
+        }
+    
+        const startGame = () => {
+            const sample = []
+            const userMoves = []
+        }
+    
+        const modalToStart = () => modal.style.transform = 'scale(1)'
+    
+        const closeModal = () => {
+            modal.style.transform = 'scale(0)'
+            startGame()
+        }
+
+        modalToStart()
         btns.forEach(btn => btn.addEventListener("click", () => playSound(btn)))
+
+        btnCloseModal.addEventListener('click', closeModal)
     })
+
 </script>
 
 <Layout title="Simon Game">
@@ -34,7 +53,7 @@ import Layout from "../layouts/Layout.astro"
             </a>
         </div>
         <div>
-            <h3 class="text-3xl font-medium">Level # <strong id="level">1</strong></h3>
+            <h3 class="text-4xl font-medium">Level # <strong id="level">1</strong></h3>
         </div>
         <div class="w-full max-w-96 min-h-full flex flex-wrap justify-center items-center gap-16">
             
@@ -48,6 +67,14 @@ import Layout from "../layouts/Layout.astro"
             color="blue"/>
 
         </div>
-        <p>Made with ❤️ by Alpes</p>
+        <section id="modal" class="w-full min-h-screen absolute grid place-content-center bg-white/30 backdrop-filter backdrop-blur-sm z-10 duration-300">
+            <dialog class="grid place-content-center inset-0 m-auto w-[90%] max-w-96 h-60 bg-[var(--primary)] justify-items-center gap-8 rounded">
+                <p class="text-3xl text-[var(--secondary)]">Let's Play!!!</p>
+                <JQueryBtn
+                text="Start"
+                id="close-modal"/>
+            </dialog>
+        </section>
+        <p>Made with <span class="text-red-600">❤️</span> by Alpes</p>
     </section>
 </Layout>
