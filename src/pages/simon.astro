@@ -1,0 +1,53 @@
+---
+import SimonSquare from "../components/Simon-Square.astro"
+import Layout from "../layouts/Layout.astro"
+---
+
+<script>
+    const playSound = src => {
+        let audio = new Audio(`sounds/simon-${src.id}.mp3`)
+        audio.play()
+    }
+
+    document.addEventListener("astro:page-load", () => {
+        const btns = document.querySelectorAll(".simon-btn")
+        btns.forEach(btn => btn.addEventListener("click", () => playSound(btn)))
+    })
+</script>
+
+<Layout title="Simon Game">
+    <section class="w-[90%] max-w-3xl min-h-screen flex flex-col justify-evenly items-center mx-auto">
+        <div class="w-full flex justify-between items-center">
+            <h2 class="text-5xl">Simon Game</h2>
+            <a class="[&>svg]:hover:text-[var(--accent)] scale-100 active:scale-90 duration-300" href="/#">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up h-12 w-12 duration-300"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+            </a>
+        </div>
+        <div>
+            <h3 class="text-3xl font-medium">Level # <strong id="level">1</strong></h3>
+        </div>
+        <div class="w-full max-w-96 min-h-full flex flex-wrap justify-center items-center gap-16">
+            
+            <SimonSquare 
+            color="green"/>
+            <SimonSquare 
+            color="red"/>
+            <SimonSquare 
+            color="yellow"/>
+            <SimonSquare 
+            color="blue"/>
+
+        </div>
+        <p>Made with ❤️ by Alpes</p>
+    </section>
+</Layout>
