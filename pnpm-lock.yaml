@@ -17,6 +17,10 @@ importers:
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4
+    devDependencies:
+      '@types/jquery':
+        specifier: ^3.5.30
+        version: 3.5.30
 
 packages:
 
@@ -557,6 +561,9 @@ packages:
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
+  '@types/jquery@3.5.30':
+    resolution: {integrity: sha512-nbWKkkyb919DOUxjmRVk8vwtDb0/k8FKncmUKFi+NY+QXqWltooxTrswvz4LspQwxvLdvzBN1TImr6cw3aQx2A==}
+
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -565,6 +572,9 @@ packages:
 
   '@types/nlcst@2.0.3':
     resolution: {integrity: sha512-vSYNSDe6Ix3q+6Z7ri9lyWqgGhJTmzRjZRqyq15N0Z/1/UnVsno9G/N40NBijoYx2seFDIl0+B2mgAb9mezUCA==}
+
+  '@types/sizzle@2.3.8':
+    resolution: {integrity: sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==}
 
   '@types/unist@3.0.2':
     resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==}
@@ -2357,6 +2367,10 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.2
 
+  '@types/jquery@3.5.30':
+    dependencies:
+      '@types/sizzle': 2.3.8
+
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.2
@@ -2366,6 +2380,8 @@ snapshots:
   '@types/nlcst@2.0.3':
     dependencies:
       '@types/unist': 3.0.2
+
+  '@types/sizzle@2.3.8': {}
 
   '@types/unist@3.0.2': {}
 

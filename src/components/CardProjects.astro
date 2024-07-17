@@ -12,8 +12,8 @@ const { href, src, alt, title, subtitle } = Astro.props
 
 
 <a class="rounded-md overflow-hidden relative" href={ href }>
-    <picture class="aspect-video overflow-hidden w-full">
-        <img class="scale-100 duration-300" src={ src } alt={ alt }>
+    <picture class="block aspect-video bg-[var(--secondary)] overflow-hidden w-full">
+        <img class="max-h-[11.25rem] h-full w-full object-cover scale-100 duration-300" src={ src } alt={ alt }>
     </picture>
     <div class="py-4 pl-4 border border-[var(--secondary)] border-t-0 rounded-b-md">
         <h2 class="text-xl font-medium text-[var(--accent)]">{ title }</h2>

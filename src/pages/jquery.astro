@@ -1,0 +1,52 @@
+---
+import JQueryBtn from "../components/JQuery-Btn.astro"
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="JQuery">
+    <section class="w-[90%] max-w-3xl min-h-screen flex flex-col justify-evenly items-center mx-auto">
+        <div class="w-full flex justify-between items-center">
+            <h2 class="text-5xl">JQuery</h2>
+            <a class="[&>svg]:hover:text-[var(--accent)] scale-100 active:scale-90 duration-300" href="/#">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-back-up h-12 w-12 duration-300"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+            </a>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+
+            <JQueryBtn
+            text="Click Me" />
+            <JQueryBtn
+            text="Click Me" />
+            <JQueryBtn
+            text="Click Me" />
+            <JQueryBtn
+            text="Click Me" />
+            <JQueryBtn
+            text="Click Me" />
+
+            
+        </div>
+        <p>Made with ❤️ by Alpes</p>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</Layout>
+
+<script>
+    /*$(document).on('click', function(event) {
+        $('h2').text(event.key);
+    });*/
+
+    document.addEventListener('keydown', e => {
+            document.querySelector('h2').textContent = e.key
+        })
+</script>
