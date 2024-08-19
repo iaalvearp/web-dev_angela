@@ -5,32 +5,83 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <script>
+import { fade } from "astro:transitions"
+
     document.addEventListener("astro:page-load", () => {
         const modal = document.getElementById('modal')
         const btnCloseModal = document.getElementById('close-modal')
         const btns = document.querySelectorAll(".simon-btn")
-        const playSound = src => {
+        let alive = true
+        const colors = ['blue', 'green', 'red', 'yellow']
+        let samples = []
+        let userMoves = []
+
+        const playSounds = src => {
             let audio = new Audio(`sounds/simon-${src.id}.mp3`)
             audio.play()
+            return src.id
+        }
+
+        const pcPlay = arr => {
+            let colorIndex = Math.floor(Math.random() * 4)
+            let audio = new Audio(`sounds/simon-${arr[colorIndex]}.mp3`)
+            audio.play()
+            return arr[colorIndex] 
         }
     
-        const startGame = () => {
-            const sample = []
-            const userMoves = []
+        const startGame = (times = 1) => {
+            
+            for (let i = 0; i < times; i++){
+                let sample = pcPlay(colors)
+    
+                samples.push(sample)
+                
+                btns.forEach(btn => {
+                    if (btn.id == sample) {
+                        pressBtn(btn)
+                    }
+                })
+            }
+            
+            
         }
     
-        const modalToStart = () => modal.style.transform = 'scale(1)'
+        const modalToStart = () => {
+            modal.style.transform = 'scale(1)'
+            userMoves = []
+            samples = []
+        }
     
         const closeModal = () => {
             modal.style.transform = 'scale(0)'
-            startGame()
+
+            setTimeout(() => {
+                startGame()
+            }, 1500);
         }
 
-        modalToStart()
-        btns.forEach(btn => btn.addEventListener("click", () => playSound(btn)))
+        const pressBtn = (btn) => {
+            btn.classList.add('pressed')
+            setTimeout(() => {
+                btn.classList.remove('pressed')
+            }, 200);
+        }
 
+        const compare = (pc, user) => pc == user
+
+        modalToStart()
+
+        btns.forEach(btn => btn.addEventListener("click", () => {
+            pressBtn(btn)
+            
+            userMoves.push(playSounds(btn))
+
+            console.log(userMoves, samples)        
+        }))
+        
         btnCloseModal.addEventListener('click', closeModal)
     })
+
 
 </script>
 
