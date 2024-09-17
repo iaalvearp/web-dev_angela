@@ -11,7 +11,7 @@ import { fade } from "astro:transitions"
         const modal = document.getElementById('modal')
         const btnCloseModal = document.getElementById('close-modal')
         const btns = document.querySelectorAll(".simon-btn")
-        let alive = true
+        let level = 1
         const colors = ['blue', 'green', 'red', 'yellow']
         let samples = []
         let userMoves = []
@@ -29,23 +29,6 @@ import { fade } from "astro:transitions"
             return arr[colorIndex] 
         }
     
-        const startGame = (times = 1) => {
-            
-            for (let i = 0; i < times; i++){
-                let sample = pcPlay(colors)
-    
-                samples.push(sample)
-                
-                btns.forEach(btn => {
-                    if (btn.id == sample) {
-                        pressBtn(btn)
-                    }
-                })
-            }
-            
-            
-        }
-    
         const modalToStart = () => {
             modal.style.transform = 'scale(1)'
             userMoves = []
@@ -56,7 +39,16 @@ import { fade } from "astro:transitions"
             modal.style.transform = 'scale(0)'
 
             setTimeout(() => {
-                startGame()
+                let sample = pcPlay(colors)
+                btns.forEach(btn => {
+                    console.log(sample, btn.id)
+                    if (btn.id == sample) {
+                        pressBtn(btn)
+                        samples.push(sample)
+                        return
+                    }
+                    return
+                })
             }, 1500);
         }
 
@@ -71,14 +63,18 @@ import { fade } from "astro:transitions"
 
         modalToStart()
 
+        const play = (btn) => {
+            
+        }
+
         btns.forEach(btn => btn.addEventListener("click", () => {
             pressBtn(btn)
             
             userMoves.push(playSounds(btn))
 
-            console.log(userMoves, samples)        
+            console.log(userMoves, samples)
         }))
-        
+
         btnCloseModal.addEventListener('click', closeModal)
     })
 
