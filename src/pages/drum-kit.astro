@@ -65,22 +65,22 @@ import Layout from "@layouts/Layout.astro"
 
 
 <script>
-    const tom1 = document.getElementById('tom1')
-    const tom2 = document.getElementById('tom2')
-    const tom3 = document.getElementById('tom3')
-    const tom4 = document.getElementById('tom4')
-    const snare = document.getElementById('snare')
-    const crash = document.getElementById('crash')
-    const kick = document.getElementById('kick')
-
-    function clicked (btn) {
-        btn.style.transform = 'scale(.9)'
-        setTimeout(() => {
-            btn.style.transform = 'scale(1)'
-        }, 200);
-    }
-
     document.addEventListener("astro:page-load", () => {
+        const tom1 = document.getElementById('tom1')
+        const tom2 = document.getElementById('tom2')
+        const tom3 = document.getElementById('tom3')
+        const tom4 = document.getElementById('tom4')
+        const snare = document.getElementById('snare')
+        const crash = document.getElementById('crash')
+        const kick = document.getElementById('kick')
+
+        function clicked (btn) {
+            btn.style.transform = 'scale(.9)'
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)'
+            }, 200);
+        }
+
         // Angela's solution
         let numberOfDumsButtons = document.querySelectorAll(".dk-btn").length;
 
