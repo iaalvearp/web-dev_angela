@@ -5,77 +5,82 @@ import Layout from "@layouts/Layout.astro"
 ---
 
 <script>
-import { fade } from "astro:transitions"
 
     document.addEventListener("astro:page-load", () => {
         const modal = document.getElementById('modal')
         const btnCloseModal = document.getElementById('close-modal')
-        const btns = document.querySelectorAll(".simon-btn")
-        let level = 1
-        const colors = ['blue', 'green', 'red', 'yellow']
-        let samples = []
-        let userMoves = []
 
         const playSounds = src => {
-            let audio = new Audio(`sounds/simon-${src.id}.mp3`)
+            let audio = new Audio(`sounds/simon-${src}.mp3`)
             audio.play()
             return src.id
         }
 
-        const pcPlay = arr => {
-            let colorIndex = Math.floor(Math.random() * 4)
-            let audio = new Audio(`sounds/simon-${arr[colorIndex]}.mp3`)
-            audio.play()
-            return arr[colorIndex] 
-        }
-    
-        const modalToStart = () => {
-            modal.style.transform = 'scale(1)'
-            userMoves = []
-            samples = []
-        }
-    
-        const closeModal = () => {
-            modal.style.transform = 'scale(0)'
+        const colors = ["red", "blue", "green", "yellow"];
+        let gamePattern = [];
+        let userPattern = [];
+        let level = 0;
+        let gameStarted = false;
 
+        function startGame() {
+            if (!gameStarted) {
+                level = 0;
+                gamePattern = [];
+                gameStarted = true;
+                document.getElementById("level").textContent = `Nivel ${level}`;
+                nextSequence();
+            }
+        }
+
+        function nextSequence() {
+            userPattern = [];
+            level++;
+            document.getElementById("level").textContent = `Nivel ${level}`;
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            gamePattern.push(randomColor);
+            animateColor(randomColor);
+        }
+
+        function animateColor(color) {
+            const button = document.getElementById(color);
+            playSounds(color)
+            button.classList.add("pressed");
+            setTimeout(() => button.classList.remove("pressed"), 100);
+        }
+
+        function checkUserAnswer(currentLevel) {
+            if (gamePattern[currentLevel] === userPattern[currentLevel]) {
+                if (userPattern.length === gamePattern.length) {
+                    setTimeout(() => nextSequence(), 1000);
+                }
+            } else {
+                gameOver();
+            }
+        }
+
+        function gameOver() {
+            document.getElementById("modal-text").textContent = "Game Over, presiona cualquier tecla para reiniciar";
+            modal.style.transform = "scale(1)"
+            gameStarted = false;
+        }
+
+        colors.forEach(color => {
+            document.getElementById(color).addEventListener("click", function () {
+            if (gameStarted) {
+                userPattern.push(color);
+                animateColor(color);
+                checkUserAnswer(userPattern.length - 1);
+            }
+            });
+        });
+
+
+        btnCloseModal.addEventListener('click', ()=> {
+            modal.style.transform = "scale(0)"
             setTimeout(() => {
-                let sample = pcPlay(colors)
-                btns.forEach(btn => {
-                    console.log(sample, btn.id)
-                    if (btn.id == sample) {
-                        pressBtn(btn)
-                        samples.push(sample)
-                        return
-                    }
-                    return
-                })
-            }, 1500);
-        }
-
-        const pressBtn = (btn) => {
-            btn.classList.add('pressed')
-            setTimeout(() => {
-                btn.classList.remove('pressed')
-            }, 200);
-        }
-
-        const compare = (pc, user) => pc == user
-
-        modalToStart()
-
-        const play = (btn) => {
-            
-        }
-
-        btns.forEach(btn => btn.addEventListener("click", () => {
-            pressBtn(btn)
-            
-            userMoves.push(playSounds(btn))
-
-            console.log(userMoves, samples)
-        }))
-
-        btnCloseModal.addEventListener('click', closeModal)
+                startGame()
+            }, 300);
+        })
     })
 
 
@@ -116,7 +121,7 @@ import { fade } from "astro:transitions"
         </div>
         <section id="modal" class="w-full min-h-screen absolute grid place-content-center bg-white/30 backdrop-filter backdrop-blur-sm z-10 duration-300">
             <dialog class="grid place-content-center inset-0 m-auto w-[90%] max-w-96 h-60 bg-[var(--primary)] justify-items-center gap-8 rounded">
-                <p class="text-3xl text-[var(--secondary)]">Let's Play!!!</p>
+                <p id="modal-text" class="text-3xl text-[var(--secondary)] text-center">Let's Play!!!</p>
                 <JQueryBtn
                 text="Start"
                 id="close-modal"/>
