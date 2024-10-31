@@ -9,6 +9,11 @@ import Layout from "@layouts/Layout.astro"
     document.addEventListener("astro:page-load", () => {
         const modal = document.getElementById('modal')
         const btnCloseModal = document.getElementById('close-modal')
+        const colors = ["red", "blue", "green", "yellow"];
+        let gamePattern = [];
+        let userPattern = [];
+        let level = 0;
+        let gameStarted = false;
 
         const playSounds = src => {
             let audio = new Audio(`sounds/simon-${src}.mp3`)
@@ -16,11 +21,6 @@ import Layout from "@layouts/Layout.astro"
             return src.id
         }
 
-        const colors = ["red", "blue", "green", "yellow"];
-        let gamePattern = [];
-        let userPattern = [];
-        let level = 0;
-        let gameStarted = false;
 
         function startGame() {
             if (!gameStarted) {
